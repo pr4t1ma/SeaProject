@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+const items = [
+  { label: "Home", href: "./" },
+  { label: "About", href: "./about" },
+  { label: "Services", href: "./services" },
+  { label: "Portfolio", href: "./portfolio" },
+  { label: "Blog", href: "./blog" },
+  { label: "Contact", href: "./contact" },
+  { label: "FAQ", href: "./faq" },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container mx-auto my-20">
+      <h1 className="text-red-700 text-3xl">Here will be the main heading</h1>
+      <div className="header">
+        <nav>
+          {isOpen ? (
+            <ul className="">
+              {items.map((item) => {
+                return (
+                  <li className="flex gap-10 my-20">
+                    <a href="" key={item.href}>
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="bg-blue-600 text-white px-6 py-2"
+              >
+                Closed
+              </button>
+            </ul>
+          ) : (
+            <button
+              onClick={() => setIsOpen(true)}
+              className="bg-blue-600 text-white px-6 py-2"
+            >
+              Open
+            </button>
+          )}
+        </nav>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
